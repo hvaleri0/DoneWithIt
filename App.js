@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, ImageBackground } from 'react-native';
+import React, { useState } from 'react';
+import { View, ImageBackground, TextInput, Text, Switch } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Screen from './app/components/Screen';
 
@@ -14,10 +14,43 @@ import Icon from './app/components/Icon';
 import ListItem from './app/components/ListItem';
 import AccountScreen from './app/screens/AccountScreen';
 import ListingScreen from './app/screens/ListingScreen';
+import AppTextInput from './app/components/AppTextInput';
+import AppPicker from './app/components/AppPicker';
+
+const categories = [
+  { label: 'Furniture', value: 1 },
+  { label: 'Clothing', value: 2 },
+  { label: 'Cameras', value: 3 },
+];
 
 export default function App() {
+  // const [firstName, setFirstName] = useState('');
+  const [isNew, setIsNew] = useState(false);
+  const [category, setCategory] = useState(categories[2]);
+
   return (
-    <ListingScreen />
+    <Screen>
+      <AppPicker
+        selectedItem={category}
+        onSelectItem={(item) => setCategory(item)}
+        icon="apps"
+        items={categories}
+        placeholder="Category"
+      />
+      <AppTextInput icon="email" placeholder="Email" />
+      <Switch value={isNew} onValueChange={(newValue) => setIsNew(newValue)} />
+    </Screen>
+    // <Screen>
+    //   <Text>{firstName}</Text>
+    //   <TextInput
+    //     maxLength={30}
+    //     keyboardType={'numeric'}
+    //     onChangeText={(text) => setFirstName(text)}
+    //     placeholder="First Name"
+    //     style={{ borderBottomColor: '#ccc', borderBottomWidth: 1 }}
+    //   />
+    // </Screen>
+    //<ListingScreen />
     // <AccountScreen />
     // <Screen>
     //   <ListItem

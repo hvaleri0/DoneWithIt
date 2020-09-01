@@ -1,24 +1,24 @@
-import React from 'react';
-import { StyleSheet, FlatList, View } from 'react-native';
+import React from "react";
+import { StyleSheet, FlatList, View } from "react-native";
 
-import Screen from '../components/Screen';
-import ListItem from '../components/ListItem';
-import colors from '../config/colors';
-import Icon from '../components/Icon';
-import ListItemSeperator from '../components/ListItemSeperator';
+import Screen from "../components/Screen";
+import ListItem from "../components/lists/ListItem";
+import colors from "../config/colors";
+import Icon from "../components/Icon";
+import ListItemSeperator from "../components/lists/ListItemSeperator";
 
 const menuItems = [
   {
-    title: 'My Listings',
+    title: "My Listings",
     icon: {
-      name: 'format-list-bulleted',
+      name: "format-list-bulleted",
       backgroundColor: colors.primary,
     },
   },
   {
-    title: 'My messages',
+    title: "My messages",
     icon: {
-      name: 'email',
+      name: "email",
       backgroundColor: colors.secondary,
     },
   },
@@ -31,7 +31,7 @@ const AccountScreen = () => {
         <ListItem
           title="Mosh Hamedani"
           subtitle="programmingwithmosh@gmail.com"
-          image={require('../assets/mosh.jpg')}
+          image={require("../assets/mosh.jpg")}
         />
       </View>
       <View style={styles.container}>

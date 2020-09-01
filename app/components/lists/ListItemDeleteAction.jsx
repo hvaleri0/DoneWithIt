@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import colors from '../config/colors';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import colors from "../../config/colors";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const ListItemDeleteAction = ({ onPress }) => {
   return (
@@ -24,9 +24,9 @@ export default ListItemDeleteAction;
 const styles = StyleSheet.create({
   container: {
     width: 70,
-    height: '100%',
+    height: "100%",
     backgroundColor: colors.danger,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

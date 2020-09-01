@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 import {
   StyleSheet,
   Text,
   View,
   Image,
   TouchableHighlight,
-} from 'react-native';
-import AppText from './AppText';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
+} from "react-native";
+import AppText from "../AppText";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
-import colors from '../config/colors';
+import colors from "../../config/colors";
 
 const ListItem = ({
   title,
@@ -39,14 +39,14 @@ export default ListItem;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: "row",
     padding: 15,
     backgroundColor: colors.white,
   },
   detailsContainer: {
     //flexDirection: 'column',
     marginLeft: 10,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   image: {
     width: 70,
@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
     color: colors.medium,
   },
   title: {
-    fontWeight: '500',
+    fontWeight: "500",
   },
 });

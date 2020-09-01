@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -6,14 +6,15 @@ import {
   Modal,
   Button,
   FlatList,
-} from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+} from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import Screen from '../components/Screen';
+import Screen from "../components/Screen";
 
-import defaultStyles from '../config/styles';
-import AppText from './AppText/index';
-import PickerItem from './PickerItem';
+import defaultStyles from "../config/styles";
+import AppText from "./AppText/index";
+import PickerItem from "./PickerItem";
+import colors from "../config/colors";
 
 const AppPicker = ({
   icon,
@@ -35,9 +36,13 @@ const AppPicker = ({
               style={styles.icon}
             />
           )}
-          <AppText style={styles.text}>
-            {selectedItem ? selectedItem.label : placeholder}
-          </AppText>
+
+          {selectedItem ? (
+            <AppText style={styles.text}>{selectedItem}</AppText>
+          ) : (
+            <AppText style={styles.placeholder}>{placeholder}</AppText>
+          )}
+
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -73,14 +78,15 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: defaultStyles.colors.light,
     borderRadius: 25,
-    flexDirection: 'row',
-    width: '100%',
+    flexDirection: "row",
+    width: "100%",
     padding: 15,
     marginVertical: 10,
   },
   icon: {
     marginRight: 10,
   },
+  placeholder: { flex: 1, color: defaultStyles.colors.medium },
   text: { flex: 1 },
   textInput: defaultStyles.text,
 });

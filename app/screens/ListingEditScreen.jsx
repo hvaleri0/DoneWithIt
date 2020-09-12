@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
-import { Form, FormField, FormPicker, SubmitButton } from "../components/forms";
-import Screen from "../components/Screen";
+import {
+  Form,
+  FormField,
+  FormPicker as Picker,
+  SubmitButton,
+  FormImagePicker,
+} from "../components/forms";
 import CategoryPickerItem from "../components/CategoryPickerItem";
+import Screen from "../components/Screen";
+import useLocation from "../hooks/useLocation";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
   price: Yup.number().required().min(1).max(10000).label("Price"),
   description: Yup.string().label("Description"),
   category: Yup.object().required().nullable().label("Category"),
+  images: Yup.array().min(1, "Please select at least one image."),
 });
 
 const categories = [
@@ -51,6 +59,8 @@ const categories = [
 ];
 
 const ListingEditScreen = () => {
+  const location = useLocation();
+
   return (
     <Screen style={styles.container}>
       <Form
@@ -59,10 +69,12 @@ const ListingEditScreen = () => {
           price: "",
           description: "",
           category: null,
+          images: [],
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => console.log(location)}
         validationSchema={validationSchema}
       >
+        <FormImagePicker name="images" />
         <FormField maxLength={255} name="title" placeholder="Title" />
         <FormField
           keyboardType="numeric"
@@ -71,7 +83,7 @@ const ListingEditScreen = () => {
           placeholder="Price"
           width={120}
         />
-        <FormPicker
+        <Picker
           items={categories}
           name="category"
           numberOfColumns={3}
@@ -82,8 +94,8 @@ const ListingEditScreen = () => {
         <FormField
           maxLength={255}
           multiline
-          numberOfLines={3}
           name="description"
+          numberOfLines={3}
           placeholder="Description"
         />
         <SubmitButton title="Post" />
@@ -92,10 +104,9 @@ const ListingEditScreen = () => {
   );
 };
 
-export default ListingEditScreen;
-
 const styles = StyleSheet.create({
   container: {
     padding: 10,
   },
 });
+export default ListingEditScreen;

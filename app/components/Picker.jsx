@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
-  StyleSheet,
   View,
+  StyleSheet,
   TouchableWithoutFeedback,
   Modal,
   Button,
@@ -9,11 +9,10 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import Screen from "./Screen";
-
-import defaultStyles from "../config/styles";
 import AppText from "./AppText/index";
+import defaultStyles from "../config/styles";
 import PickerItem from "./PickerItem";
+import Screen from "./Screen";
 
 const Picker = ({
   icon,
@@ -26,6 +25,7 @@ const Picker = ({
   width = "100%",
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
@@ -38,9 +38,8 @@ const Picker = ({
               style={styles.icon}
             />
           )}
-
           {selectedItem ? (
-            <AppText style={styles.text}>{selectedItem}</AppText>
+            <AppText style={styles.text}>{selectedItem.label}</AppText>
           ) : (
             <AppText style={styles.placeholder}>{placeholder}</AppText>
           )}
@@ -52,9 +51,9 @@ const Picker = ({
           />
         </View>
       </TouchableWithoutFeedback>
-      <Modal visible={modalVisible} animationType="fade">
+      <Modal visible={modalVisible} animationType="slide">
         <Screen>
-          <Button title="close" onPress={() => setModalVisible(false)} />
+          <Button title="Close" onPress={() => setModalVisible(false)} />
           <FlatList
             data={items}
             keyExtractor={(item) => item.value.toString()}
@@ -76,8 +75,6 @@ const Picker = ({
   );
 };
 
-export default Picker;
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: defaultStyles.colors.light,
@@ -91,5 +88,6 @@ const styles = StyleSheet.create({
   },
   placeholder: { flex: 1, color: defaultStyles.colors.medium },
   text: { flex: 1 },
-  textInput: defaultStyles.text,
 });
+
+export default Picker;

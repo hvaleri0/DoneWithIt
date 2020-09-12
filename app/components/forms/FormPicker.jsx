@@ -3,7 +3,6 @@ import { useFormikContext } from "formik";
 
 import Picker from "../Picker";
 import ErrorMessage from "./ErrorMessage";
-import { number } from "yup";
 
 const FormPicker = ({
   items,
@@ -19,7 +18,7 @@ const FormPicker = ({
       <Picker
         items={items}
         numberOfColumns={numberOfColumns}
-        onSelectItem={(item) => setFieldValue(name, item)}
+        onSelectItem={(item) => setFieldValue(name, item)} // Why does it have it without .label on mosh code
         PickerItemComponent={PickerItemComponent}
         placeholder={placeholder}
         selectedItem={values[name]}

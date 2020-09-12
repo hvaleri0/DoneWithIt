@@ -1,100 +1,62 @@
-import React, { useState } from "react";
-import { View, ImageBackground, Text, Switch } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Image } from "react-native";
+// import * as ImagePicker from "expo-image-picker";
+// import * as Permissions from "expo-permissions";
 
-//  Screens
-import AccountScreen from "./app/screens/AccountScreen";
-import ListingDetailScreen from "./app/screens/ListingDetailScreen";
-import ListingEditScreen from "./app/screens/ListingEditScreen";
-import ListingScreen from "./app/screens/ListingScreen";
-import LoginScreen from "./app/screens/LoginScreen";
-import MessagesScreen from "./app/screens/MessagesScreen";
-import RegisterScreen from "./app/screens/RegisterScreen";
-import ViewImageScreen from "./app/screens/ViewImageScreen";
-import WelcomeScreen from "./app/screens/WelcomeScreen";
-
-//  Components
-import Button from "./app/components/Button";
-import Picker from "./app/components/Picker";
-import AppText from "./app/components/AppText";
-import TextInput from "./app/components/TextInput";
-import Card from "./app/components/Card";
-import Icon from "./app/components/Icon";
-import ListItem from "./app/components/lists/ListItem";
 import Screen from "./app/components/Screen";
-
-const categories = [
-  { label: "Furniture", value: 1 },
-  { label: "Clothing", value: 2 },
-  { label: "Cameras", value: 3 },
-];
+// import Button from "./app/components/Button";
+// import ImageInput from "./app/components/ImageInput";
+import ImageInputList from "./app/components/ImageInputList";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
 
 export default function App() {
-  // const [firstName, setFirstName] = useState('');
-  const [isNew, setIsNew] = useState(false);
-  const [category, setCategory] = useState(categories[2]);
+  // const [imageUris, setImageUris] = useState([]);
+
+  // const handleAdd = (uri) => {
+  //   setImageUris([...imageUris, uri]);
+  // };
+
+  // const handleRemove = (uri) => {
+  //   setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
+  // };
+
+  // const requestPermission = async () => {
+  //   // const { granted } = await Permissions.askAsync(
+  //   //   Permissions.CAMERA_ROLL,
+  //   //   Permissions.LOCATION
+  //   // );
+  //   const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
+  //   if (!granted)
+  //     alert("You need to enable persmission to access Cameral Roll");
+  // };
+
+  // useEffect(() => {
+  //   requestPermission();
+  // }, []);
+
+  // const selectImage = async () => {
+  //   try {
+  //     const result = await ImagePicker.launchImageLibraryAsync();
+  //     if (!result.cancelled) setImageUri(result.uri);
+  //   } catch (error) {
+  //     console.log("Error reading an image", error);
+  //   }
+  // };
 
   return (
-    // <AccountScreen />
-    // <ListingDetailScreen />
-    // <ListingEditScreen />
-    // <ListingScreen />
-    // <LoginScreen />
-    // <MessagesScreen />
-    // <RegisterScreen />
-    // <ViewImageScreen />
-    <WelcomeScreen />
-
+    <ListingEditScreen />
     // <Screen>
-    //   <Picker
-    //     selectedItem={category}
-    //     onSelectItem={(item) => setCategory(item)}
-    //     icon="apps"
-    //     items={categories}
-    //     placeholder="Category"
-    //   />
-    //   <TextInput icon="email" placeholder="Email" />
-    //   <Switch value={isNew} onValueChange={(newValue) => setIsNew(newValue)} />
-    // </Screen>
-    // <Screen>
-    //   <Text>{firstName}</Text>
-    //   <TextInput
-    //     maxLength={30}
-    //     keyboardType={'numeric'}
-    //     onChangeText={(text) => setFirstName(text)}
-    //     placeholder="First Name"
-    //     style={{ borderBottomColor: '#ccc', borderBottomWidth: 1 }}
+    //   {/* <Button title="Select Image" onPress={selectImage} />
+    //   <Image source={{ uri: imageUri }} style={{ width: 200, height: 200 }} /> */}
+    //   <ImageInputList
+    //     imageUris={imageUris}
+    //     onAddImage={handleAdd}
+    //     onRemoveImage={handleRemove}
     //   />
     // </Screen>
-    // <ListingScreen />
-    // <AccountScreen />
-    // <Screen>
-    //   <ListItem
-    //     title="My Title"
-    //     //subtitle="My Subtitle"
-    //     ImageComponent={
-    //       <Icon
-    //         name="email"
-    //         size={50}
-    //         backgroundColor="red"
-    //         iconColor="white"
-    //       />
-    //     }
-    //   />
-    // </Screen>
-    // <MessagesScreen />
-    // <View
-    //   style={{
-    //     backgroundColor: '#f8f4f4',
-    //     padding: 20,
-    //     paddingTop: 100,
-    //   }}
-    // >
-    //   <Card
-    //     title="Red Jacket for Sale"
-    //     subtitle="$100"
-    //     image={require('./app/assets/jacket.jpg')}
-    //   />
-    // </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {},
+});

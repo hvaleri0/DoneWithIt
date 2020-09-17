@@ -1,59 +1,99 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Image } from "react-native";
-// import * as ImagePicker from "expo-image-picker";
-// import * as Permissions from "expo-permissions";
+import React from "react";
+import { StyleSheet, Text, Button } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Screen from "./app/components/Screen";
-// import Button from "./app/components/Button";
-// import ImageInput from "./app/components/ImageInput";
-import ImageInputList from "./app/components/ImageInputList";
-import ListingEditScreen from "./app/screens/ListingEditScreen";
+import AuthNavigator from "./app/navigation/AuthNavigator";
+import AppNavigator from "./app/navigation/AppNavigator";
+import navigationTheme from "./app/navigation/navigationTheme";
+import routes from "./app/navigation/routes";
+
+const Link = () => {
+  const navigation = useNavigation();
+  return (
+    <Button
+      title="View Tweet"
+      onPress={() => navigation.navigate("TweetDetails", { id: 1 })}
+    />
+  );
+};
+
+const Tweets = ({ navigation }) => (
+  <Screen>
+    <Text>Tweets</Text>
+    <Link />
+  </Screen>
+);
+
+const TweetDetails = ({ route }) => (
+  <Screen>
+    <Text>Tweet Details {route.params.id}</Text>
+  </Screen>
+);
+
+const Account = () => (
+  <Screen>
+    <Text>Account details</Text>
+  </Screen>
+);
+
+const Stack = createStackNavigator();
+const StackNavigator = () => (
+  <Stack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: "dodgerblue" },
+      headerTintColor: "white",
+    }}
+  >
+    <Stack.Screen name="Tweets" component={Tweets} />
+    <Stack.Screen
+      name="TweetDetails"
+      component={TweetDetails}
+      //   options={{ title: "this is the fucking title" }}
+      //   options={({ route }) => ({ title: route.params.id })}
+      options={{
+        headerTintColor: "white",
+        headerStyle: { backgroundColor: "tomato" },
+        //headerShown: false,
+      }}
+    />
+  </Stack.Navigator>
+);
+
+const Tab = createBottomTabNavigator();
+const TabNavigator = () => (
+  <Tab.Navigator
+    tabBarOptions={{
+      activeBackgroundColor: "tomato",
+      activeTintColor: "white",
+      inactiveBackgroundColor: "#eee",
+      inactiveTintColor: "black",
+    }}
+  >
+    <Tab.Screen
+      name={"Feed"}
+      component={StackNavigator}
+      options={{
+        tabBarIcon: ({ size, color }) => (
+          <MaterialCommunityIcons name="home" size={size} color={color} />
+        ),
+      }}
+    />
+    <Tab.Screen name={routes.ACCOUNT} component={Account} />
+  </Tab.Navigator>
+);
 
 export default function App() {
-  // const [imageUris, setImageUris] = useState([]);
-
-  // const handleAdd = (uri) => {
-  //   setImageUris([...imageUris, uri]);
-  // };
-
-  // const handleRemove = (uri) => {
-  //   setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
-  // };
-
-  // const requestPermission = async () => {
-  //   // const { granted } = await Permissions.askAsync(
-  //   //   Permissions.CAMERA_ROLL,
-  //   //   Permissions.LOCATION
-  //   // );
-  //   const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
-  //   if (!granted)
-  //     alert("You need to enable persmission to access Cameral Roll");
-  // };
-
-  // useEffect(() => {
-  //   requestPermission();
-  // }, []);
-
-  // const selectImage = async () => {
-  //   try {
-  //     const result = await ImagePicker.launchImageLibraryAsync();
-  //     if (!result.cancelled) setImageUri(result.uri);
-  //   } catch (error) {
-  //     console.log("Error reading an image", error);
-  //   }
-  // };
-
   return (
-    <ListingEditScreen />
-    // <Screen>
-    //   {/* <Button title="Select Image" onPress={selectImage} />
-    //   <Image source={{ uri: imageUri }} style={{ width: 200, height: 200 }} /> */}
-    //   <ImageInputList
-    //     imageUris={imageUris}
-    //     onAddImage={handleAdd}
-    //     onRemoveImage={handleRemove}
-    //   />
-    // </Screen>
+    <NavigationContainer theme={navigationTheme}>
+      {/* <StackNavigator /> */}
+      {/* <TabNavigator /> */}
+      <AuthNavigator />
+      {/* <AppNavigator /> */}
+    </NavigationContainer>
   );
 }
 

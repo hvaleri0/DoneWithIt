@@ -4,6 +4,7 @@ import * as Yup from "yup";
 
 import Screen from "../components/Screen";
 import { Form, FormField, SubmitButton } from "../components/forms";
+import routes from "../navigation/routes";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().min(4).label("Name"),
@@ -44,7 +45,7 @@ const RegisterScreen = () => {
           secureTextEntry
           textContentType="password"
         />
-        <SubmitButton title="Register" />
+        <SubmitButton title={routes.REGISTER} />
       </Form>
     </Screen>
   );

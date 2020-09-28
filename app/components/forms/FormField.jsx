@@ -5,12 +5,19 @@ import TextInput from "../TextInput";
 import ErrorMessage from "./ErrorMessage";
 
 const FormField = ({ name, width, ...rest }) => {
-  const { setFieldTouched, handleChange, touched, errors } = useFormikContext();
+  const {
+    setFieldTouched,
+    setFieldValue,
+    touched,
+    errors,
+    values,
+  } = useFormikContext();
   return (
     <>
       <TextInput
         onBlur={() => setFieldTouched(name)}
-        onChangeText={handleChange(name)}
+        onChangeText={(text) => setFieldValue(name, text)}
+        value={values[name]}
         width={width}
         {...rest}
       />

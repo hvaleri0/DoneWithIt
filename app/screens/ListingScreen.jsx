@@ -30,7 +30,7 @@ const ListingScreen = ({ navigation }) => {
       {getListingsApi.error && (
         <>
           <AppText>Could not retrieve the listings.</AppText>
-          <Button title="Retry" onPress={getListingsApi.loadListings} />
+          <Button title="Retry" onPress={getListingsApi.request} />
         </>
       )}
       <ActivityIndicator visible={getListingsApi.loading} />
@@ -43,6 +43,7 @@ const ListingScreen = ({ navigation }) => {
             subtitle={"$" + item.price}
             imageUrl={item.images[0].url}
             onPress={() => navigation.navigate(routes.LISTING_DETAIL, item)}
+            thumbnailUrl={item.images[0].thumbnailUrl}
           />
         )}
       />

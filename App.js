@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, Button } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AppLoading } from "expo";
 
 import Screen from "./app/components/Screen";
 import AuthNavigator from "./app/navigation/AuthNavigator";
@@ -11,6 +12,8 @@ import AppNavigator from "./app/navigation/AppNavigator";
 import navigationTheme from "./app/navigation/navigationTheme";
 import routes from "./app/navigation/routes";
 import OfflineNotice from "./app/components/OfflineNotice";
+import AuthContext from "./app/auth/context";
+import authStorage from "./app/auth/storage";
 
 const Link = () => {
   const navigation = useNavigation();
@@ -88,16 +91,34 @@ const TabNavigator = () => (
 );
 
 export default function App() {
+  const [user, setUser] = useState();
+  const [isReady, setIsReady] = useState(false);
+
+  const restoreUser = async () => {
+    const user = await authStorage.getUser();
+    console.log(user);
+    if (user) setUser(user);
+  };
+
+  // useEffect(() => {
+  //   restoreToken();
+  // }, []);
+
+  if (!isReady)
+    return (
+      <AppLoading startAsync={restoreUser} onFinish={() => setIsReady(true)} />
+    );
+
   return (
-    <>
+    <AuthContext.Provider value={{ user, setUser }}>
       <OfflineNotice />
       <NavigationContainer theme={navigationTheme}>
         {/* <StackNavigator /> */}
         {/* <TabNavigator /> */}
-        {/* <AuthNavigator /> */}
-        <AppNavigator />
+        {user ? <AppNavigator /> : <AuthNavigator />}
+        {/* <AppNavigator /> */}
       </NavigationContainer>
-    </>
+    </AuthContext.Provider>
   );
 }
 

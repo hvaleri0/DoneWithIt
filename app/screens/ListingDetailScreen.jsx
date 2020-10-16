@@ -1,19 +1,24 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, Platform, View } from "react-native";
 import { Image } from "react-native-expo-image-cache";
 
 import AppText from "../components/AppText";
 import colors from "../config/colors";
 import ListItem from "../components/lists/ListItem";
+import ContactSellerForm from "../components/ContactSellerForm";
 
 const ListingDetailScreen = ({ route }) => {
   const listing = route.params;
+
   return (
-    <View>
+    <KeyboardAvoidingView
+      behavior="position"
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 100}
+    >
       <Image
         style={styles.image}
-        tint="light"
         preview={{ uri: listing.images[0].thumbnailUrl }}
+        tint="light"
         uri={listing.images[0].url}
       />
       <View style={styles.detailContainer}>
@@ -23,11 +28,12 @@ const ListingDetailScreen = ({ route }) => {
           <ListItem
             image={require("../assets/mosh.jpg")}
             title="Mosh Hamedani"
-            subtitle="5 Listings"
+            subTitle="5 Listings"
           />
         </View>
+        <ContactSellerForm listing={listing} />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -43,7 +49,7 @@ const styles = StyleSheet.create({
     color: colors.secondary,
     fontWeight: "bold",
     fontSize: 20,
-    marginVertical: 20,
+    marginVertical: 10,
   },
   title: {
     fontSize: 24,

@@ -27,6 +27,19 @@
     "description": "A marketplace for selling the stuff you don't need anymore.",
     "notification": {
       "iosDisplayInForeground": true
+    },
+    "extra": {
+      "bugsnag": {
+        "apiKey": "740f24e8a0d188083a273435d1ca30bf"
+      }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "@bugsnag/expo/hooks/post-publish.js",
+          "config": {}
+        }
+      ]
     }
   }
 }
